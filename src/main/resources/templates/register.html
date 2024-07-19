@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Register</h2>
+            <form th:action="@{/register}" th:object="${user}" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" th:field="*{username}" class="form-control" id="username">
+                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" th:field="*{email}" class="form-control" id="email">
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" th:field="*{password}" class="form-control" id="password">
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></div>
+                </div>
+                <div class="form-group">
+                    <label for="rePassword">Re-enter Password:</label>
+                    <input type="password" th:field="*{rePassword}" class="form-control" id="rePassword">
+                    <div th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}" class="text-danger"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <div th:if="${error}" class="text-danger" th:text="${error}"></div>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

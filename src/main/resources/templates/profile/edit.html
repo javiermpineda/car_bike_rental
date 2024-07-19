@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Profile <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Edit Profile</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Edit Profile</h5>
+                    <form th:action="@{/profile/edit}" th:object="${userProfile}" method="post">
+                        <div class="form-group">
+                            <label for="fullName">Full Name:</label>
+                            <input type="text" id="fullName" th:field="*{fullName}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateOfBirth">Date of Birth:</label>
+                            <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <input type="text" id="gender" th:field="*{gender}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" th:field="*{email}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number:</label>
+                            <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" id="address" th:field="*{address}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City:</label>
+                            <input type="text" id="city" th:field="*{city}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="stateProvince">State/Province:</label>
+                            <input type="text" id="stateProvince" th:field="*{stateProvince}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="postalCode">Postal Code:</label>
+                            <input type="text" id="postalCode" th:field="*{postalCode}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country:</label>
+                            <input type="text" id="country" th:field="*{country}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="driversLicenseNumber">Driver's License Number:</label>
+                            <input type="text" id="driversLicenseNumber" th:field="*{driversLicenseNumber}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="licenseIssueDate">License Issue Date:</label>
+                            <input type="date" id="licenseIssueDate" th:field="*{licenseIssueDate}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="licenseExpiryDate">License Expiry Date:</label>
+                            <input type="date" id="licenseExpiryDate" th:field="*{licenseExpiryDate}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="licenseCategory">License Category:</label>
+                            <input type="text" id="licenseCategory" th:field="*{licenseCategory}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber">Credit Card Number:</label>
+                            <input type="text" id="cardNumber" th:field="*{cardNumber}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardExpiryDate">Card Expiry Date:</label>
+                            <input type="text" id="cardExpiryDate" th:field="*{cardExpiryDate}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardCvv">Card CVV:</label>
+                            <input type="text" id="cardCvv" th:field="*{cardCvv}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="billingAddress">Billing Address:</label>
+                            <input type="text" id="billingAddress" th:field="*{billingAddress}" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/scripts :: script-content"></div>
+</body>
+</html>
+

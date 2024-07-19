@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Profile <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Your Profile</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <img src="images/avatar.png" alt="Profile Picture" class="img-fluid rounded-circle mb-3">
+                    <h4 th:text="${userProfile.fullName}"></h4>
+                    <button class="btn btn-primary"></button>
+                    <button class="btn btn-secondary"></button>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>Contact Information</h5>
+                    <ul class="list-unstyled">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Personal Information</h5>
+                    <p>Full Name: <span th:text="${userProfile.fullName}"></span></p>
+                    <p>Date of Birth: <span th:text="${userProfile.dateOfBirth}"></span></p>
+                    <p>Gender: <span th:text="${userProfile.gender}"></span></p>
+                    <h5>Identification Information</h5>
+                    <p>Driver's License Number: <span th:text="${userProfile.driversLicenseNumber}"></span></p>
+                    <p>License Issue Date: <span th:text="${userProfile.licenseIssueDate}"></span></p>
+                    <p>License Expiry Date: <span th:text="${userProfile.licenseExpiryDate}"></span></p>
+                    <p>License Category: <span th:text="${userProfile.licenseCategory}"></span></p>
+                    <h5>Payment Methods</h5>
+                    <p>Credit Card Number: <span th:text="${userProfile.cardNumber}"></span></p>
+                    <p>Card Expiry Date: <span th:text="${userProfile.cardExpiryDate}"></span></p>
+                    <p>Card CVV: <span th:text="${userProfile.cardCvv}"></span></p>
+                    <p>Billing Address: <span th:text="${userProfile.billingAddress}"></span></p>
+                    <a href="/profile/edit" class="btn btn-primary">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/scripts :: script-content"></div>
+</body>
+</html>

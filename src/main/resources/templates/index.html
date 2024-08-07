@@ -2,7 +2,7 @@
 <html  lang="en" xmlns:th="http://www.thymeleaf.org">
   <head th:replace="fragments/head :: head-content"></head>
   <body>
-    
+
     <div th:replace="~{fragments/navbar :: navbar}"></div>
 
     <!-- END nav -->
@@ -32,35 +32,32 @@
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="#" class="request-form ftco-animate bg-primary">
-		          		<h2>Make your trip</h2>
-			    				<div class="form-group">
-			    					<label for="" class="label">Pick-up location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
-			    				<div class="form-group">
-			    					<label for="" class="label">Drop-off location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
-			    				<div class="d-flex">
-			    					<div class="form-group mr-2">
-			                <label for="" class="label">Pick-up date</label>
-			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-			              </div>
-			              <div class="form-group ml-2">
-			                <label for="" class="label">Drop-off date</label>
-			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-			              </div>
-		              </div>
-		              <div class="form-group">
-		                <label for="" class="label">Pick-up time</label>
-		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
-		              </div>
-			            <div class="form-group">
-			              <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
-			            </div>
-			    			</form>
-	  					</div>
+							<form action="/available-vehicles" method="get" class="request-form ftco-animate bg-primary">
+								<h2>Make your trip</h2>
+								<div class="form-group">
+									<label for="pick_up_location" class="label">Pick-up location</label>
+									<input type="text" class="form-control" name="pick_up_location" placeholder="City, Airport, Station, etc">
+								</div>
+								<div class="form-group">
+									<label for="drop_off_location" class="label">Drop-off location</label>
+									<input type="text" class="form-control" name="drop_off_location" placeholder="City, Airport, Station, etc">
+								</div>
+								<div class="d-flex">
+									<div class="form-group mr-2">
+										<label for="startDate" class="label">Pick-up date</label>
+										<input type="date" class="form-control" id="book_pick_date" name="startDate" placeholder="Date">
+									</div>
+									<div class="form-group ml-2">
+										<label for="endDate" class="label">Drop-off date</label>
+										<input type="date" class="form-control" id="book_off_date" name="endDate" placeholder="Date">
+									</div>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-secondary py-3 px-4">Rent A Car Now</button>
+								</div>
+							</form>
+
+						</div>
 	  					<div class="col-md-8 d-flex align-items-center">
 	  						<div class="services-wrap rounded-right w-100">
 	  							<h3 class="heading-section mb-4">Better Way to Rent Your Perfect Cars</h3>
@@ -71,7 +68,7 @@
 				              	<div class="text w-100">
 					                <h3 class="heading mb-2">Choose Your Pickup Location</h3>
 				                </div>
-					            </div>      
+					            </div>
 					          </div>
 					          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
 					            <div class="services w-100 text-center">
@@ -79,7 +76,7 @@
 				              	<div class="text w-100">
 					                <h3 class="heading mb-2">Select the Best Deal</h3>
 					              </div>
-					            </div>      
+					            </div>
 					          </div>
 					          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
 					            <div class="services w-100 text-center">
@@ -87,7 +84,7 @@
 				              	<div class="text w-100">
 					                <h3 class="heading mb-2">Reserve Your Rental Car</h3>
 					              </div>
-					            </div>      
+					            </div>
 					          </div>
 					        </div>
 					        <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
@@ -381,56 +378,19 @@
           </div>
         </div>
       </div>
-    </section>	
+    </section>
 
-    <section class="ftco-counter ftco-section img bg-light" id="section-counter">
-			<div class="overlay"></div>
-    	<div class="container">
-    		<div class="row">
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="60">0</strong>
-                <span>Year <br>Experienced</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="1090">0</strong>
-                <span>Total <br>Cars</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text text-border d-flex align-items-center">
-                <strong class="number" data-number="2590">0</strong>
-                <span>Happy <br>Customers</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text d-flex align-items-center">
-                <strong class="number" data-number="67">0</strong>
-                <span>Total <br>Branches</span>
-              </div>
-            </div>
-          </div>
-        </div>
-    	</div>
-    </section>	
+	<div th:replace="fragments/counter :: counter"></div>
 
-    
+
+
     <!-- Include the footer fragment -->
     <div th:replace="fragments/footer :: footer"></div>
-    
+
 
     <!-- Include the footer fragment -->
-       
+
    <div th:replace="fragments/scripts :: script-content"></div>
-    
+
   </body>
 </html>

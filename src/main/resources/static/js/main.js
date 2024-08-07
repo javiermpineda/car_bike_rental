@@ -314,10 +314,10 @@
   });
 
 
-	$('#book_pick_date,#book_off_date').datepicker({
-	  'format': 'm/d/yyyy',
-	  'autoclose': true
-	});
+	// $('#book_pick_date,#book_off_date').datepicker({
+	//   'format': 'm/d/yyyy',
+	//   'autoclose': true
+	// });
 	$('#time_pick').timepicker();
 
 

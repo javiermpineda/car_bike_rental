@@ -19,7 +19,7 @@ public class WebSecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
             .requestMatchers("/", "/home", "/register", "/css/**", "/js/**", "/images/**", "/error", "/login","/index").permitAll()
-            .requestMatchers("/bike/**", "/car/**","/profile/**").authenticated() // Secure bike and car sections
+            .requestMatchers("/bike/**", "/car/**","/profile/**","/user/**").authenticated() // Secure bike and car sections
             .anyRequest().permitAll()
             )
             .formLogin(form -> form

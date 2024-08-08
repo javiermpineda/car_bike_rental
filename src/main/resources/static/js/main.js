@@ -318,7 +318,7 @@
 	//   'format': 'm/d/yyyy',
 	//   'autoclose': true
 	// });
-	$('#time_pick').timepicker();
+	// $('#time_pick').timepicker();
 
 
 

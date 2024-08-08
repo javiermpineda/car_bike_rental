@@ -16,8 +16,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Date;
 
 @Controller
 public class VehicleController {
@@ -44,8 +46,8 @@ public class VehicleController {
 
     @GetMapping("/available-vehicles")
     public String getAvailableVehicles(
-            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam("pick_up_location") String pickUpLocation,
             @RequestParam("drop_off_location") String dropOffLocation,
             @RequestParam(defaultValue = "0") int page,
@@ -54,7 +56,10 @@ public class VehicleController {
             Authentication authentication) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<Vehicle> vehiclePage = vehicleService.findAvailableVehicles(startDate, endDate, pageable);
+        Date start = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date end = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Page<Vehicle> vehiclePage = vehicleService.findAvailableVehicles(start, end, pageable);
         model.addAttribute("vehicles", vehiclePage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", vehiclePage.getTotalPages());
@@ -70,7 +75,11 @@ public class VehicleController {
             User user = userService.findByUsername(userDetails.getUsername());
             if (user != null) {
                 model.addAttribute("userId", user.getId());
+            }else{
+                model.addAttribute("userId", -1);
             }
+        }else{
+            model.addAttribute("userId", -1);
         }
 
         return "cars";

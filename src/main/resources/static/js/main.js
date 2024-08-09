@@ -305,7 +305,7 @@
 	 var voucherContent = document.getElementById(voucherId);
 	 var printWindow = window.open('', '', 'height=600,width=800');
 
-	 printWindow.document.write('<html><head><title>Print Voucher</title>');
+	 printWindow.document.write('<html lang="en"><head><title>Print Voucher</title>');
 	 printWindow.document.write('<style>');
 	 printWindow.document.write('body { font-family: Arial, sans-serif; margin: 20px; }');
 	 printWindow.document.write('.receipt { width: 100%; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }');

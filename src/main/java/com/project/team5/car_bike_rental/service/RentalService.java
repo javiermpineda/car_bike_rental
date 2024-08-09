@@ -24,4 +24,10 @@ public class RentalService {
     public void deleteRental(Long id) {
         rentalRepository.deleteById(id);
     }
+          // Nuevo método para obtener rentas por ID de usuario
+    
+          public List<Rental> getRentalsByUserId(Long userId) {
+            return rentalRepository.findByUserId(userId);
+        }
+       
 }

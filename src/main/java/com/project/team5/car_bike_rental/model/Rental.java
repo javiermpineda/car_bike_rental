@@ -1,5 +1,7 @@
 package com.project.team5.car_bike_rental.model;
+
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -26,8 +28,21 @@ public class Rental {
     @Temporal(TemporalType.DATE)
     private Date returnDate;
 
+    @Column(name = "pick_up_location")
+    private String pickUpLocation;
+
+    @Column(name = "drop_off_location")
+    private String dropOffLocation;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "total")
+    private BigDecimal total;
+
     // No-argument constructor
     public Rental() {
+        this.state = "reserved";
     }
 
     // Getters and setters
@@ -69,5 +84,37 @@ public class Rental {
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public String getPickUpLocation() {
+        return pickUpLocation;
+    }
+
+    public void setPickUpLocation(String pickUpLocation) {
+        this.pickUpLocation = pickUpLocation;
+    }
+
+    public String getDropOffLocation() {
+        return dropOffLocation;
+    }
+
+    public void setDropOffLocation(String dropOffLocation) {
+        this.dropOffLocation = dropOffLocation;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 }

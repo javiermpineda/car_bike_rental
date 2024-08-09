@@ -21,6 +21,7 @@ public class RentalController {
 
     @PostMapping
     public Rental saveRental(@RequestBody Rental rental) {
+        System.out.println("Received rental request: " + rental);
         return rentalService.saveRental(rental);
     }
 

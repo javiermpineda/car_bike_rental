@@ -17,12 +17,12 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/home", "/register", "/css/**", "/js/**", "/images/**", "/error", "/login", "/index", "/api/rentals").permitAll()
-                        .requestMatchers("/bike/**", "/car/**", "/profile/**").authenticated()
-                        .anyRequest().permitAll()
-                )
-                .formLogin(form -> form
+            .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/", "/home", "/register", "/css/**", "/js/**", "/images/**", "/error", "/login","/index").permitAll()
+            .requestMatchers("/bike/**", "/car/**","/profile/**","/user/**").authenticated() // Secure bike and car sections
+            .anyRequest().permitAll()
+            )
+            .formLogin(form -> form
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)  // Redirect to home page after login
                 .permitAll()

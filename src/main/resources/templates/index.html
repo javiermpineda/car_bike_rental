@@ -2,7 +2,7 @@
 <html  lang="en" xmlns:th="http://www.thymeleaf.org">
   <head th:replace="fragments/head :: head-content"></head>
   <body>
-
+    
     <div th:replace="~{fragments/navbar :: navbar}"></div>
 
     <!-- END nav -->
@@ -32,7 +32,7 @@
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-							<form id="rentalForm" action="/available-vehicles" method="get" class="request-form ftco-animate bg-primary">
+							<form action="/available-vehicles" method="get" class="request-form ftco-animate bg-primary">
 								<h2>Make your trip</h2>
 								<div class="form-group">
 									<label for="pick_up_location" class="label">Pick-up location</label>
@@ -68,7 +68,7 @@
 				              	<div class="text w-100">
 					                <h3 class="heading mb-2">Choose Your Pickup Location</h3>
 				                </div>
-					            </div>
+					            </div>      
 					          </div>
 					          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
 					            <div class="services w-100 text-center">
@@ -76,7 +76,7 @@
 				              	<div class="text w-100">
 					                <h3 class="heading mb-2">Select the Best Deal</h3>
 					              </div>
-					            </div>
+					            </div>      
 					          </div>
 					          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
 					            <div class="services w-100 text-center">
@@ -84,7 +84,7 @@
 				              	<div class="text w-100">
 					                <h3 class="heading mb-2">Reserve Your Rental Car</h3>
 					              </div>
-					            </div>
+					            </div>      
 					          </div>
 					        </div>
 <!--					        <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>-->
@@ -307,40 +307,56 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>	
 
-	<div th:replace="fragments/counter :: counter"></div>
+    <section class="ftco-counter ftco-section img bg-light" id="section-counter">
+			<div class="overlay"></div>
+    	<div class="container">
+    		<div class="row">
+          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text text-border d-flex align-items-center">
+                <strong class="number" data-number="60">0</strong>
+                <span>Year <br>Experienced</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text text-border d-flex align-items-center">
+                <strong class="number" data-number="1090">0</strong>
+                <span>Total <br>Cars</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text text-border d-flex align-items-center">
+                <strong class="number" data-number="2590">0</strong>
+                <span>Happy <br>Customers</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text d-flex align-items-center">
+                <strong class="number" data-number="67">0</strong>
+                <span>Total <br>Branches</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    	</div>
+    </section>	
 
-
-
+    
     <!-- Include the footer fragment -->
     <div th:replace="fragments/footer :: footer"></div>
-
+    
 
     <!-- Include the footer fragment -->
-
+       
    <div th:replace="fragments/scripts :: script-content"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('rentalForm').addEventListener('submit', function(event) {
-                var pickUpLocation = document.querySelector('input[name="pick_up_location"]').value;
-                var dropOffLocation = document.querySelector('input[name="drop_off_location"]').value;
-                var startDate = document.querySelector('input[name="startDate"]').value;
-                var endDate = document.querySelector('input[name="endDate"]').value;
-
-                if (!pickUpLocation || !dropOffLocation || !startDate || !endDate) {
-                    event.preventDefault();
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'All fields are required!',
-                        text: 'Please fill in the Pick-up location, Drop-off location, Pick-up date, and Drop-off date.',
-                        confirmButtonText: 'OK'
-                    });
-                }
-            });
-        });
-
-    </script>
   </body>
 </html>

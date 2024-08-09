@@ -1,347 +1,63 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head-content">
-    <!-- Añadir CSS directamente en el head -->
-    <style>
-        /* General Styles */
-
-        .search-form-container {
-            position: fixed;
-            top: 20%;
-            left: 0; /* Cambiado de right a left para posicionar a la izquierda */
-            width: 300px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 1000; /* Make sure it's above other content */
-        }
-
-        .request-form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .request-form .form-group {
-            margin-bottom: 15px;
-        }
-
-        .request-form .btn-secondary {
-            background-color: #6c757d;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%; /* Botón ahora ocupa el ancho completo del formulario */
-        }
-
-        .request-form .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        .request-form .form-control {
-            border-radius: 4px;
-            border: 1px solid #ced4da;
-            padding: 10px;
-            font-size: 14px;
-        }
-
-        .car-wrap .btn-primary {
-            width: 100%; /* Botón de reserva ahora ocupa el ancho completo de su contenedor */
-            text-align: center; /* Centra el texto dentro del botón */
-        }
-    </style>
-</head>
+ <head th:replace="fragments/head :: head-content"></head>
 <body>
-<div th:replace="fragments/navbar :: navbar"></div>
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-            <div class="col-md-9 ftco-animate pb-5">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i class="ion-ios-arrow-forward"></i></span></p>
-                <h1 class="mb-3 bread">Choose Your Car</h1>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+                <div class="col-md-9 ftco-animate pb-5">
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i class="ion-ios-arrow-forward"></i></span></p>
+                    <h1 class="mb-3 bread">Choose Your Car</h1>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="ftco-section bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <!-- Search Form -->
-                <div class="search-form-container">
-                    <form id="rentalForm" action="/available-vehicles" method="get" class="request-form ftco-animate bg-primary">
-                        <h2>Make your trip</h2>
-                        <div class="form-group">
-                            <label for="pick_up_location" class="label">Pick-up location</label>
-                            <input type="text" class="form-control" name="pick_up_location"  th:value="${pick_up_location}" placeholder="City, Airport, Station, etc">
+    </section>
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div th:each="vehicle : ${vehicles}" class="col-md-4">
+                    <div class="car-wrap rounded ftco-animate">
+                        <div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + @{${vehicle.image}} + ');'">
                         </div>
-                        <div class="form-group">
-                            <label for="drop_off_location" class="label">Drop-off location</label>
-                            <input type="text" class="form-control" name="drop_off_location" th:value="${drop_off_location}"  placeholder="City, Airport, Station, etc">
-                        </div>
-                        <div class="d-flex">
-                            <div class="form-group mr-2">
-                                <label for="startDate" class="label">Pick-up date</label>
-                                <input type="date" class="form-control" id="book_pick_date" name="startDate" th:value="${startDate}" placeholder="Date">
+                        <div class="text">
+                            <h2 class="mb-0"><a th:href="@{${vehicle.url}}" th:text="${vehicle.make} + ' ' + ${vehicle.model}"></a></h2>
+                            <div class="d-flex mb-3">
+                                <span class="cat" th:text="${vehicle.make}"></span>
+                                <p class="price ml-auto">$<span th:text="${vehicle.price_per_day}"></span> <span>/day</span></p>
                             </div>
-                            <div class="form-group ml-2">
-                                <label for="endDate" class="label">Drop-off date</label>
-                                <input type="date" class="form-control" id="book_off_date" name="endDate" th:value="${endDate}"  placeholder="Date">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-secondary py-3 px-4">Rent A Car Now</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="row">
-                    <div th:each="vehicle : ${vehicles}" class="col-md-4">
-                        <div class="car-wrap rounded ftco-animate">
-                            <div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + @{${vehicle.image}} + ');'"></div>
-                            <div class="text">
-                                <h2 class="mb-0"><a th:href="@{${vehicle.url}}" th:text="${vehicle.make} + ' ' + ${vehicle.model}"></a></h2>
-                                <div class="d-flex mb-3">
-                                    <span class="cat" th:text="${vehicle.make}"></span>
-                                    <p class="price ml-auto">$<span th:text="${vehicle.price_per_day}"></span> <span>/day</span></p>
-                                </div>
-                                <p class="total-price d-flex mb-0">
-                                    Total Price: $<span class="total-price-span">0.00</span>
-                                </p>
-                                <p class="d-flex mb-0 d-block">
-                                    <a href="#" class="btn btn-primary py-2 book-now" th:attr="data-vehicle-id=${vehicle.id}">Book now</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col text-center">
-                        <div class="block-27">
-                            <ul>
-                                <li th:if="${currentPage > 0}">
-                                    <a th:href="@{/available-vehicles(startDate=${startDate}, endDate=${endDate}, page=${currentPage - 1}, size=4)}">&lt;</a>
-                                </li>
-                                <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active' : ''">
-                                    <a th:href="@{/available-vehicles(startDate=${startDate}, endDate=${endDate}, page=${i}, size=4)}" th:text="${i + 1}"></a>
-                                </li>
-                                <li th:if="${currentPage < totalPages - 1}">
-                                    <a th:href="@{/available-vehicles(startDate=${startDate}, endDate=${endDate}, page=${currentPage + 1}, size=4)}">&gt;</a>
-                                </li>
-                            </ul>
+                            <p class="d-flex mb-0 d-block">
+                                <a href="#" class="btn btn-primary py-2 mr-1">Book now</a> 
+                                <a th:href="@{${vehicle.url}}" class="btn btn-secondary py-2 ml-1">Details</a>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Please Log In</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                You need to be logged in to book a car. Please log in to proceed.
-            </div>
-            <div class="modal-footer">
-                <a href="/login" class="btn btn-primary">Log In</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <div class="block-27">
+                        <ul>
+                            <li><a href="#">&lt;</a></li>
+                            <li class="active"><span>1</span></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&gt;</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- Include the footer fragment -->
-<div th:replace="fragments/footer :: footer"></div>
-
-<!-- Include the scripts fragment -->
-<div th:replace="fragments/scripts :: script-content"></div>
-<script>
-    function adjustDate(dateStr, daysToAdd) {
-        var date = new Date(dateStr);
-        date.setDate(date.getDate() + daysToAdd);
-        return date.toISOString().split('T')[0];
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-        function getPricePerDay(priceElement) {
-            var priceSpan = priceElement.querySelector('span');
-            if (priceSpan) {
-                var priceText = priceSpan.textContent.trim();
-                var priceValue = parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
-                return priceValue;
-            }
-            return 0;
-        }
-
-        function calculateTotalCost(pricePerDay, startDate, endDate) {
-            var start = new Date(startDate);
-            var end = new Date(endDate);
-            var timeDiff = end - start;
-            var days = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
-            return (pricePerDay * days).toFixed(2);
-        }
-
-        function updateTotalCost(element) {
-            var priceElement = element.querySelector('.price');
-            var pricePerDayElement = getPricePerDay(priceElement);
-            var startDateElement = document.querySelector('input[name="startDate"]').value;
-            var endDateElement = document.querySelector('input[name="endDate"]').value;
-            var totalPriceSpan = element.querySelector('.total-price-span');
-            var bookNowButton = element.querySelector('.book-now');
-
-            if (startDateElement && endDateElement && pricePerDayElement && totalPriceSpan) {
-                if (startDateElement && endDateElement && !isNaN(pricePerDayElement)) {
-                    var totalCost = calculateTotalCost(pricePerDayElement, startDateElement, endDateElement);
-                    totalPriceSpan.textContent = totalCost;
-                    if (bookNowButton) {
-                        bookNowButton.setAttribute('data-total-cost', totalCost);
-                    }
-                }
-            }
-        }
-
-        document.querySelectorAll('.car-wrap').forEach(function(carWrap) {
-            updateTotalCost(carWrap);
-        });
-
-        document.querySelectorAll('.pick-up-date, .drop-off-date').forEach(function(input) {
-            input.addEventListener('change', function() {
-                var carWrap = this.closest('.car-wrap');
-                if (carWrap) {
-                    updateTotalCost(carWrap);
-                }
-            });
-        });
-
-        var isAuthenticated = [[${#authorization.expression('isAuthenticated()')}]];
-        var userId = [[${userId}]];
-
-        document.querySelectorAll('.book-now').forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                if (!isAuthenticated) {
-                    event.preventDefault();
-                    $('#loginModal').modal('show');
-                } else if (userId === -1 || userId === '') {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'User ID is not available. Please log in again.',
-                        icon: 'error',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK'
-                    });
-                } else {
-                    var pickUpLocation = document.querySelector('input[name="pick_up_location"]').value;
-                    var dropOffLocation = document.querySelector('input[name="drop_off_location"]').value;
-                    var startDate = document.querySelector('input[name="startDate"]').value;
-                    var endDate = document.querySelector('input[name="endDate"]').value;
-                    if (!pickUpLocation || !dropOffLocation || !startDate || !endDate) {
-                        event.preventDefault();
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'All fields are required!',
-                            text: 'Please fill in the Pick-up location, Drop-off location, Pick-up date, and Drop-off date.',
-                            confirmButtonText: 'OK'
-                        });
-                    }else{
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "Do you want to book this car?",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, book it!'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                var vehicleId = parseInt(button.getAttribute('data-vehicle-id'), 10);
-                                var totalCost = button.getAttribute('data-total-cost');
-
-                                var adjustedStartDate = adjustDate(startDate, 1);
-                                var adjustedEndDate = adjustDate(endDate, 1);
-
-                                var bookingData = {
-                                    user: { id: userId },
-                                    vehicle: { id: vehicleId },
-                                    rentalDate: adjustedStartDate,
-                                    returnDate: adjustedEndDate,
-                                    pickUpLocation: pickUpLocation,
-                                    dropOffLocation: dropOffLocation,
-                                    state: 'reserved',
-                                    total: totalCost
-                                };
-                                console.log(bookingData);
-
-                                fetch('/api/rentals', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify(bookingData)
-                                })
-                                    .then(response => {
-                                        if (response.ok) {
-                                            return response.json();
-                                        } else {
-                                            throw new Error('Failed to save booking');
-                                        }
-                                    })
-                                    .then(data => {
-                                        Swal.fire({
-                                            title: 'Success!',
-                                            text: 'Your reservation has been saved successfully.',
-                                            icon: 'success',
-                                            confirmButtonColor: '#3085d6',
-                                            confirmButtonText: 'OK'
-                                        }).then(() => {
-                                            window.location.href = '/';
-                                        });
-                                    })
-                                    .catch(error => {
-                                        Swal.fire({
-                                            title: 'Error!',
-                                            text: 'There was an issue saving your reservation. Please try again later.',
-                                            icon: 'error',
-                                            confirmButtonColor: '#3085d6',
-                                            confirmButtonText: 'OK'
-                                        });
-                                        console.error('Error:', error);
-                                    });
-                            }
-                        });
-                    }
-                }
-            });
-        });
-
-
-        document.getElementById('rentalForm').addEventListener('submit', function(event) {
-            var pickUpLocation = document.querySelector('input[name="pick_up_location"]').value;
-            var dropOffLocation = document.querySelector('input[name="drop_off_location"]').value;
-            var startDate = document.querySelector('input[name="startDate"]').value;
-            var endDate = document.querySelector('input[name="endDate"]').value;
-
-            if (!pickUpLocation || !dropOffLocation || !startDate || !endDate) {
-                event.preventDefault();
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'All fields are required!',
-                    text: 'Please fill in the Pick-up location, Drop-off location, Pick-up date, and Drop-off date.',
-                    confirmButtonText: 'OK'
-                });
-            }
-        });
-    });
-</script>
-</body>
+    </section>
+    <!-- Include the footer fragment -->
+    <div th:replace="fragments/footer :: footer"></div>
+    
+    <!-- Include the scripts fragment -->
+    <div th:replace="fragments/scripts :: script-content"></div>
+    
+  </body>
 </html>
+>>>>>>> origin/main

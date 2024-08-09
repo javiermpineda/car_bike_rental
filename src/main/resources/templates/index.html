@@ -32,7 +32,7 @@
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-							<form action="/available-vehicles" method="get" class="request-form ftco-animate bg-primary">
+							<form id="rentalForm" action="/available-vehicles" method="get" class="request-form ftco-animate bg-primary">
 								<h2>Make your trip</h2>
 								<div class="form-group">
 									<label for="pick_up_location" class="label">Pick-up location</label>
@@ -87,7 +87,7 @@
 					            </div>
 					          </div>
 					        </div>
-					        <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
+<!--					        <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>-->
 	  						</div>
 	  					</div>
 	  				</div>
@@ -96,78 +96,7 @@
     </section>
 
 
-    <section class="ftco-section ftco-no-pt bg-light">
-    	<div class="container">
-    		<div class="row justify-content-center">
-          <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-          	<span class="subheading">What we offer</span>
-            <h2 class="mb-2">Feeatured Vehicles</h2>
-          </div>
-        </div>
-    		<div class="row">
-    			<div class="col-md-12">
-    				<div class="carousel-car owl-carousel">
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-1.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-2.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-3.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-4.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
+<!--    <div th:replace="fragments/feeatured :: feeatured"></div>-->
 
     <section class="ftco-section ftco-about">
 			<div class="container">
@@ -181,7 +110,7 @@
 
 	            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
 	            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-	            <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+<!--	            <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>-->
 	          </div>
 					</div>
 				</div>
@@ -392,5 +321,26 @@
 
    <div th:replace="fragments/scripts :: script-content"></div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('rentalForm').addEventListener('submit', function(event) {
+                var pickUpLocation = document.querySelector('input[name="pick_up_location"]').value;
+                var dropOffLocation = document.querySelector('input[name="drop_off_location"]').value;
+                var startDate = document.querySelector('input[name="startDate"]').value;
+                var endDate = document.querySelector('input[name="endDate"]').value;
+
+                if (!pickUpLocation || !dropOffLocation || !startDate || !endDate) {
+                    event.preventDefault();
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'All fields are required!',
+                        text: 'Please fill in the Pick-up location, Drop-off location, Pick-up date, and Drop-off date.',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        });
+
+    </script>
   </body>
 </html>

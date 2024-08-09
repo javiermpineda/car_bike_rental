@@ -72,7 +72,7 @@
             <div class="col-md-4">
                 <!-- Search Form -->
                 <div class="search-form-container">
-                    <form action="/available-vehicles" method="get" class="request-form ftco-animate bg-primary">
+                    <form id="rentalForm" action="/available-vehicles" method="get" class="request-form ftco-animate bg-primary">
                         <h2>Make your trip</h2>
                         <div class="form-group">
                             <label for="pick_up_location" class="label">Pick-up location</label>
@@ -241,77 +241,105 @@
                         confirmButtonText: 'OK'
                     });
                 } else {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "Do you want to book this car?",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, book it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            var vehicleId = parseInt(button.getAttribute('data-vehicle-id'), 10);
-                            var pickUpLocation = document.querySelector('input[name="pick_up_location"]').value;
-                            var dropOffLocation = document.querySelector('input[name="drop_off_location"]').value;
-                            var startDate = document.querySelector('input[name="startDate"]').value;
-                            var endDate = document.querySelector('input[name="endDate"]').value;
-                            var totalCost = button.getAttribute('data-total-cost');
+                    var pickUpLocation = document.querySelector('input[name="pick_up_location"]').value;
+                    var dropOffLocation = document.querySelector('input[name="drop_off_location"]').value;
+                    var startDate = document.querySelector('input[name="startDate"]').value;
+                    var endDate = document.querySelector('input[name="endDate"]').value;
+                    if (!pickUpLocation || !dropOffLocation || !startDate || !endDate) {
+                        event.preventDefault();
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'All fields are required!',
+                            text: 'Please fill in the Pick-up location, Drop-off location, Pick-up date, and Drop-off date.',
+                            confirmButtonText: 'OK'
+                        });
+                    }else{
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "Do you want to book this car?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, book it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                var vehicleId = parseInt(button.getAttribute('data-vehicle-id'), 10);
+                                var totalCost = button.getAttribute('data-total-cost');
 
-                            var adjustedStartDate = adjustDate(startDate, 1);
-                            var adjustedEndDate = adjustDate(endDate, 1);
+                                var adjustedStartDate = adjustDate(startDate, 1);
+                                var adjustedEndDate = adjustDate(endDate, 1);
 
-                            var bookingData = {
-                                user: { id: userId },
-                                vehicle: { id: vehicleId },
-                                rentalDate: adjustedStartDate,
-                                returnDate: adjustedEndDate,
-                                pickUpLocation: pickUpLocation,
-                                dropOffLocation: dropOffLocation,
-                                state: 'reserved',
-                                total: totalCost
-                            };
-                            console.log(bookingData);
+                                var bookingData = {
+                                    user: { id: userId },
+                                    vehicle: { id: vehicleId },
+                                    rentalDate: adjustedStartDate,
+                                    returnDate: adjustedEndDate,
+                                    pickUpLocation: pickUpLocation,
+                                    dropOffLocation: dropOffLocation,
+                                    state: 'reserved',
+                                    total: totalCost
+                                };
+                                console.log(bookingData);
 
-                            fetch('/api/rentals', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(bookingData)
-                            })
-                                .then(response => {
-                                    if (response.ok) {
-                                        return response.json();
-                                    } else {
-                                        throw new Error('Failed to save booking');
-                                    }
+                                fetch('/api/rentals', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(bookingData)
                                 })
-                                .then(data => {
-                                    Swal.fire({
-                                        title: 'Success!',
-                                        text: 'Your reservation has been saved successfully.',
-                                        icon: 'success',
-                                        confirmButtonColor: '#3085d6',
-                                        confirmButtonText: 'OK'
-                                    }).then(() => {
-                                        window.location.href = '/';
+                                    .then(response => {
+                                        if (response.ok) {
+                                            return response.json();
+                                        } else {
+                                            throw new Error('Failed to save booking');
+                                        }
+                                    })
+                                    .then(data => {
+                                        Swal.fire({
+                                            title: 'Success!',
+                                            text: 'Your reservation has been saved successfully.',
+                                            icon: 'success',
+                                            confirmButtonColor: '#3085d6',
+                                            confirmButtonText: 'OK'
+                                        }).then(() => {
+                                            window.location.href = '/';
+                                        });
+                                    })
+                                    .catch(error => {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'There was an issue saving your reservation. Please try again later.',
+                                            icon: 'error',
+                                            confirmButtonColor: '#3085d6',
+                                            confirmButtonText: 'OK'
+                                        });
+                                        console.error('Error:', error);
                                     });
-                                })
-                                .catch(error => {
-                                    Swal.fire({
-                                        title: 'Error!',
-                                        text: 'There was an issue saving your reservation. Please try again later.',
-                                        icon: 'error',
-                                        confirmButtonColor: '#3085d6',
-                                        confirmButtonText: 'OK'
-                                    });
-                                    console.error('Error:', error);
-                                });
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
             });
+        });
+
+
+        document.getElementById('rentalForm').addEventListener('submit', function(event) {
+            var pickUpLocation = document.querySelector('input[name="pick_up_location"]').value;
+            var dropOffLocation = document.querySelector('input[name="drop_off_location"]').value;
+            var startDate = document.querySelector('input[name="startDate"]').value;
+            var endDate = document.querySelector('input[name="endDate"]').value;
+
+            if (!pickUpLocation || !dropOffLocation || !startDate || !endDate) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'All fields are required!',
+                    text: 'Please fill in the Pick-up location, Drop-off location, Pick-up date, and Drop-off date.',
+                    confirmButtonText: 'OK'
+                });
+            }
         });
     });
 </script>

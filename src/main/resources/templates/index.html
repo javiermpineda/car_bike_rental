@@ -32,32 +32,35 @@
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-							<form action="/available-vehicles" method="get" class="request-form ftco-animate bg-primary">
-								<h2>Make your trip</h2>
-								<div class="form-group">
-									<label for="pick_up_location" class="label">Pick-up location</label>
-									<input type="text" class="form-control" name="pick_up_location" placeholder="City, Airport, Station, etc">
-								</div>
-								<div class="form-group">
-									<label for="drop_off_location" class="label">Drop-off location</label>
-									<input type="text" class="form-control" name="drop_off_location" placeholder="City, Airport, Station, etc">
-								</div>
-								<div class="d-flex">
-									<div class="form-group mr-2">
-										<label for="startDate" class="label">Pick-up date</label>
-										<input type="date" class="form-control" id="book_pick_date" name="startDate" placeholder="Date">
-									</div>
-									<div class="form-group ml-2">
-										<label for="endDate" class="label">Drop-off date</label>
-										<input type="date" class="form-control" id="book_off_date" name="endDate" placeholder="Date">
-									</div>
-								</div>
-								<div class="form-group">
-									<button type="submit" class="btn btn-secondary py-3 px-4">Rent A Car Now</button>
-								</div>
-							</form>
-
-						</div>
+	  						<form action="#" class="request-form ftco-animate bg-primary">
+		          		<h2>Make your trip</h2>
+			    				<div class="form-group">
+			    					<label for="" class="label">Pick-up location</label>
+			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+			    				</div>
+			    				<div class="form-group">
+			    					<label for="" class="label">Drop-off location</label>
+			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+			    				</div>
+			    				<div class="d-flex">
+			    					<div class="form-group mr-2">
+			                <label for="" class="label">Pick-up date</label>
+			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
+			              </div>
+			              <div class="form-group ml-2">
+			                <label for="" class="label">Drop-off date</label>
+			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
+			              </div>
+		              </div>
+		              <div class="form-group">
+		                <label for="" class="label">Pick-up time</label>
+		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
+		              </div>
+			            <div class="form-group">
+			              <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
+			            </div>
+			    			</form>
+	  					</div>
 	  					<div class="col-md-8 d-flex align-items-center">
 	  						<div class="services-wrap rounded-right w-100">
 	  							<h3 class="heading-section mb-4">Better Way to Rent Your Perfect Cars</h3>
@@ -87,7 +90,7 @@
 					            </div>      
 					          </div>
 					        </div>
-<!--					        <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>-->
+					        <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
 	  						</div>
 	  					</div>
 	  				</div>
@@ -96,7 +99,78 @@
     </section>
 
 
-<!--    <div th:replace="fragments/feeatured :: feeatured"></div>-->
+    <section class="ftco-section ftco-no-pt bg-light">
+    	<div class="container">
+    		<div class="row justify-content-center">
+          <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+          	<span class="subheading">What we offer</span>
+            <h2 class="mb-2">Feeatured Vehicles</h2>
+          </div>
+        </div>
+    		<div class="row">
+    			<div class="col-md-12">
+    				<div class="carousel-car owl-carousel">
+    					<div class="item">
+    						<div class="car-wrap rounded ftco-animate">
+		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-1.jpg);">
+		    					</div>
+		    					<div class="text">
+		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
+		    						<div class="d-flex mb-3">
+			    						<span class="cat">Cheverolet</span>
+			    						<p class="price ml-auto">$500 <span>/day</span></p>
+		    						</div>
+		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+		    					</div>
+		    				</div>
+    					</div>
+    					<div class="item">
+    						<div class="car-wrap rounded ftco-animate">
+		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-2.jpg);">
+		    					</div>
+		    					<div class="text">
+		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
+		    						<div class="d-flex mb-3">
+			    						<span class="cat">Cheverolet</span>
+			    						<p class="price ml-auto">$500 <span>/day</span></p>
+		    						</div>
+		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+		    					</div>
+		    				</div>
+    					</div>
+    					<div class="item">
+    						<div class="car-wrap rounded ftco-animate">
+		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-3.jpg);">
+		    					</div>
+		    					<div class="text">
+		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
+		    						<div class="d-flex mb-3">
+			    						<span class="cat">Cheverolet</span>
+			    						<p class="price ml-auto">$500 <span>/day</span></p>
+		    						</div>
+		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+		    					</div>
+		    				</div>
+    					</div>
+    					<div class="item">
+    						<div class="car-wrap rounded ftco-animate">
+		    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-4.jpg);">
+		    					</div>
+		    					<div class="text">
+		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
+		    						<div class="d-flex mb-3">
+			    						<span class="cat">Cheverolet</span>
+			    						<p class="price ml-auto">$500 <span>/day</span></p>
+		    						</div>
+		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+		    					</div>
+		    				</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </section>
 
     <section class="ftco-section ftco-about">
 			<div class="container">
@@ -110,7 +184,7 @@
 
 	            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
 	            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-<!--	            <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>-->
+	            <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
 	          </div>
 					</div>
 				</div>
@@ -357,6 +431,6 @@
     <!-- Include the footer fragment -->
        
    <div th:replace="fragments/scripts :: script-content"></div>
-
+    
   </body>
 </html>

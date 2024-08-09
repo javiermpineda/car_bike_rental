@@ -1,0 +1,77 @@
+<!-- fragments/voucher-modal.html -->
+<!-- Modal to display vouchers -->
+<div class="modal fade" th:fragment="voucherModal" id="voucherModal" tabindex="-1" role="dialog" aria-labelledby="voucherModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="voucherModalLabel">Your Vouchers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-unstyled">
+                    <li th:each="voucher : ${vouchers}">
+                        <div class="receipt">
+                            <h6 class="text-center">Voucher Details</h6>
+                            <hr>
+                            <ul class="list-unstyled" id="${voucher.id}">
+                                <li>
+                                    <strong>Voucher ID:</strong> <span th:text="${voucher != null ? voucher.id : 'N/A'}">ID</span>
+                                </li>
+                                <li>
+                                    <strong>Voucher Code:</strong> <span th:text="${voucher != null ? voucher.voucherCode : 'N/A'}">CODE1234</span>
+                                </li>
+                                <li>
+                                    <strong>Discount Amount:</strong> <span th:text="${voucher != null ? voucher.discountAmount : 'N/A'}">20%</span>
+                                </li>
+                                <li>
+                                    <strong>Issue Date:</strong> <span th:text="${voucher != null ? voucher.issueDate : 'N/A'}">2024-08-01</span>
+                                </li>
+                                <li>
+                                    <strong>Expiry Date:</strong> <span th:text="${voucher != null ? voucher.expiryDate : 'N/A'}">2024-12-31</span>
+                                </li>
+                                <li>
+                                    <strong>Rental Date:</strong> <span th:text="${voucher != null ? voucher.rental.rentalDate : 'N/A'}">2024-08-05</span>
+                                </li>
+                                <li>
+                                    <strong>Return Date:</strong> <span th:text="${voucher != null ? voucher.rental.returnDate : 'N/A'}">2024-08-10</span>
+                                </li>
+                                <li>
+                                    <strong>Vehicle:</strong> <span th:text="${voucher != null ? voucher.rental.vehicle.make : 'N/A'}">Toyota</span>
+                                    <span th:text="${voucher != null ? voucher.rental.vehicle.model : 'N/A'}">Corolla</span>
+                                    (<span th:text="${voucher != null ? voucher.rental.vehicle.type : 'N/A'}">Sedan</span>,
+                                    <span th:text="${voucher != null ? voucher.rental.vehicle.year : 'N/A'}">2022</span>)
+                                </li>
+                            </ul>
+                            <hr>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary print-btn" data-voucher-id="[${voucher.id}]">Print Receipt</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+    function printReceipt() {
+        alert("Printing...")
+        var printWindow = window.open('', '', 'height=600,width=800');
+        printWindow.document.write('<html><head><title>Print Voucher</title>');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(document.getElementById('receiptContent').innerHTML);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+</script>
+</body>
+</html>

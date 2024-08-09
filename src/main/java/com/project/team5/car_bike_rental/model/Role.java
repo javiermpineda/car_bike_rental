@@ -1,7 +1,5 @@
 package com.project.team5.car_bike_rental.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -15,7 +13,6 @@ public class Role {
     @Column(nullable = false)
     private String role;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

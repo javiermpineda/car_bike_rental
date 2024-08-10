@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Vehicles</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Manage Vehicles</h1>
+    <a th:href="@{/admin/vehicles/add}" class="btn btn-primary mb-3">Add New Vehicle</a>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Price per Day</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vehicle : ${vehicles}">
+            <td th:text="${vehicle.make}"></td>
+            <td th:text="${vehicle.model}"></td>
+            <td th:text="${vehicle.price_per_day}"></td>
+            <td th:text="${vehicle.type}"></td>
+            <td>
+                <a th:href="@{/admin/vehicles/delete/{id}(id=${vehicle.id})}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

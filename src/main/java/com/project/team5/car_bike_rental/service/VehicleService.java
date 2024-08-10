@@ -24,4 +24,16 @@ public class VehicleService {
     public Page<Vehicle> findAvailableVehicles(Date startDate, Date endDate, Pageable pageable) {
         return vehicleRepository.findAvailableVehicles(startDate, endDate, pageable);
     }
+
+    public List<Vehicle> getAllVehicles() {
+        return vehicleRepository.findAll();
+    }
+
+    public void addVehicle(Vehicle vehicle) {
+        vehicleRepository.save(vehicle);
+    }
+
+    public void deleteVehicle(Long id) {
+        vehicleRepository.deleteById(id);
+    }
 }

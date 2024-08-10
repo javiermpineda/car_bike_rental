@@ -1,65 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Rental List</title>
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <style>
-      /* Estilo para el fondo rojo en la parte superior */
-      .top-background {
-        background-color: #545357; /* Color rojo */
-        color: rgb(0, 0, 0); /* Color de texto blanco para contraste */
-        padding: 50px; /* Espaciado interno */
-      }
-    </style>
-    <head th:replace="fragments/head :: head-content"></head>
-  </head>
-  <body>
-    <div class="top-background">
-      <div th:replace="fragments/navbar :: navbar"></div>
-    </div>
 
-    <div class="container mt-5">
-      <h1 class="text-center">Rentals for User</h1>
-      <div th:if="${#lists.isEmpty(rentals)}">
-        <p class="text-center text-muted">No reservations made.</p>
+<head th:replace="fragments/head :: head-content"></head>
+<body>
+<!-- Bootstrap CSS -->
+<link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+/>
+<style>
+  /* Estilo para el fondo rojo en la parte superior */
+  .top-background {
+    background-color: #545357; /* Color rojo */
+    color: rgb(0, 0, 0); /* Color de texto blanco para contraste */
+    padding: 50px; /* Espaciado interno */
+  }
+</style>
+<div class="top-background">
+  <div th:replace="fragments/navbar :: navbar"></div>
+</div>
+
+<div class="container mt-5">
+  <h1 class="text-center">Rentals for User</h1>
+  <div th:if="${#lists.isEmpty(rentals)}">
+    <p class="text-center text-muted">No reservations made.</p>
+  </div>
+  <div th:unless="${#lists.isEmpty(rentals)}">
+    <table class="table table-bordered table-striped mt-4">
+      <thead class="thead-dark">
+      <tr>
+        <th>Rental ID</th>
+        <th>Vehicle Make</th>
+        <th>Vehicle Model</th>
+        <th>Rental Date</th>
+        <th>Return Date</th>
+        <th>Price</th>
+        <th>Voucher</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="rental : ${rentals}">
+        <td th:text="${rental.id}"></td>
+        <td th:text="${rental.vehicle.make}"></td>
+        <td th:text="${rental.vehicle.model}"></td>
+        <td th:text="${rental.rentalDate}"></td>
+        <td th:text="${rental.returnDate}"></td>
+        <td th:text="${rental.total}"></td>
+        <td>
+          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" th:data-target="'#voucherModal' + ${rental.id}">
+            View Voucher
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal for Voucher Details -->
+<div th:each="rental : ${rentals}">
+  <div class="modal fade" th:id="'voucherModal' + ${rental.id}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Voucher Details for Rental ID: <span th:text="${rental.id}"></span></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Voucher Code:</strong> <span th:text="${rental.voucherCode}"></span></p>
+          <p><strong>Discount Amount:</strong> <span th:text="${rental.discountAmount}"></span></p>
+          <p><strong>Issue Date:</strong> <span th:text="${rental.issueDate}"></span></p>
+          <p><strong>Expiry Date:</strong> <span th:text="${rental.expiryDate}"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
-      <div th:unless="${#lists.isEmpty(rentals)}">
-        <table class="table table-bordered table-striped mt-4">
-          <thead class="thead-dark">
-            <tr>
-              <th>Rental ID</th>
-              <th>Vehicle Make</th>
-              <th>Vehicle Model</th>
-              <th>Rental Date</th>
-              <th>Return Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="rental : ${rentals}">
-              <td th:text="${rental.id}"></td>
-              <td th:text="${rental.vehicle.make}"></td>
-              <td th:text="${rental.vehicle.model}"></td>
-              <td th:text="${rental.rentalDate}"></td>
-              <td th:text="${rental.returnDate}"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
-    <!-- Include the footer fragment -->
-    <div th:replace="fragments/footer :: footer"></div>
+  </div>
+</div>
 
-    <!-- Include the footer fragment -->
+<!-- Include the footer fragment -->
+<div th:replace="fragments/footer :: footer"></div>
 
-    <div th:replace="fragments/scripts :: script-content"></div>
+<!-- Include the footer fragment -->
+<div th:replace="fragments/scripts :: script-content"></div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

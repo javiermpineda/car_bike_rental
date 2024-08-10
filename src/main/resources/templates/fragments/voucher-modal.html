@@ -1,0 +1,60 @@
+<!-- Modal to display rentals (with voucher details) -->
+<div class="modal fade" th:fragment="voucherModal" id="voucherModal" tabindex="-1" role="dialog" aria-labelledby="voucherModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="voucherModalLabel">Your Rentals with Vouchers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-unstyled">
+                    <li th:each="rental : ${rentals}">
+                        <div class="receipt" th:id="${rental.id}">
+                            <h6 class="text-center">Rental & Voucher Details</h6>
+                            <hr>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <strong>Rental ID:</strong> <span th:text="${rental.id}">ID</span>
+                                </li>
+                                <li>
+                                    <strong>Voucher Code:</strong> <span th:text="${rental.voucherCode}">CODE1234</span>
+                                </li>
+                                <li>
+                                    <strong>Discount Amount:</strong> <span th:text="${rental.discountAmount}">20%</span>
+                                </li>
+                                <li>
+                                    <strong>Issue Date:</strong> <span th:text="${#dates.format(rental.issueDate, 'yyyy-MM-dd')}">2024-08-01</span>
+                                </li>
+                                <li>
+                                    <strong>Expiry Date:</strong> <span th:text="${#dates.format(rental.expiryDate, 'yyyy-MM-dd')}">2024-12-31</span>
+                                </li>
+                                <li>
+                                    <strong>Rental Date:</strong> <span th:text="${#dates.format(rental.rentalDate, 'yyyy-MM-dd')}">2024-08-05</span>
+                                </li>
+                                <li>
+                                    <strong>Return Date:</strong> <span th:text="${#dates.format(rental.returnDate, 'yyyy-MM-dd')}">2024-08-10</span>
+                                </li>
+                                <li>
+                                    <strong>Vehicle:</strong>
+                                    <span th:text="${rental.vehicle.make}">Toyota</span>
+                                    <span th:text="${rental.vehicle.model}">Corolla</span>
+                                    (<span th:text="${rental.vehicle.type}">Sedan</span>,
+                                    <span th:text="${rental.vehicle.year}">2022</span>)
+                                </li>
+                            </ul>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary print-btn" th:onclick="'printReceipt(' + ${rental.id} + ')'" th:text="'Print Receipt'"></button>
+                            </div>
+                            <hr>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

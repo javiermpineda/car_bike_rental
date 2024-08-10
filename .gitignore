@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 /bin/
+application.log application.log.2024-07-18.0173722755847300.tmp

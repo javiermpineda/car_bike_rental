@@ -6,28 +6,26 @@
 (function($) {
 
 	"use strict";
-
 	var isMobile = {
 		Android: function() {
 			return navigator.userAgent.match(/Android/i);
 		},
-			BlackBerry: function() {
+		BlackBerry: function() {
 			return navigator.userAgent.match(/BlackBerry/i);
 		},
-			iOS: function() {
+		iOS: function() {
 			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
 		},
-			Opera: function() {
+		Opera: function() {
 			return navigator.userAgent.match(/Opera Mini/i);
 		},
-			Windows: function() {
+		Windows: function() {
 			return navigator.userAgent.match(/IEMobile/i);
 		},
-			any: function() {
+		any: function() {
 			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
 		}
 	};
-
 
 	$(window).stellar({
     responsive: true,
@@ -172,27 +170,6 @@
 	};
 	scrollWindow();
 
-	var isMobile = {
-		Android: function() {
-			return navigator.userAgent.match(/Android/i);
-		},
-			BlackBerry: function() {
-			return navigator.userAgent.match(/BlackBerry/i);
-		},
-			iOS: function() {
-			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-		},
-			Opera: function() {
-			return navigator.userAgent.match(/Opera Mini/i);
-		},
-			Windows: function() {
-			return navigator.userAgent.match(/IEMobile/i);
-		},
-			any: function() {
-			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-		}
-	};
-
 	var counter = function() {
 		
 		$('#section-counter, .hero-wrap, .ftco-counter').waypoint( function( direction ) {
@@ -324,3 +301,28 @@
 
 })(jQuery);
 
+ function printReceipt(voucherId) {
+	 var voucherContent = document.getElementById(voucherId);
+	 var printWindow = window.open('', '', 'height=600,width=800');
+
+	 printWindow.document.write('<html lang="en"><head><title>Print Voucher</title>');
+	 printWindow.document.write('<style>');
+	 printWindow.document.write('body { font-family: Arial, sans-serif; margin: 20px; }');
+	 printWindow.document.write('.receipt { width: 100%; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }');
+	 printWindow.document.write('.receipt h6 { font-size: 18px; font-weight: bold; margin-bottom: 10px; text-align: center; }');
+	 printWindow.document.write('.receipt ul { list-style: none; padding: 0; }');
+	 printWindow.document.write('.receipt ul li { margin-bottom: 5px; font-size: 16px; }');
+	 printWindow.document.write('.receipt ul li strong { display: inline-block; width: 150px; }');
+	 printWindow.document.write('.receipt .text-center { text-align: center; margin-top: 20px; }');
+	 printWindow.document.write('.print-btn { display: none; }'); // Hide the print button in print view
+	 printWindow.document.write('</style>');
+	 printWindow.document.write('</head><body>');
+	 printWindow.document.write('<div class="receipt">');
+	 printWindow.document.write(voucherContent.innerHTML);
+	 printWindow.document.write('</div>');
+	 printWindow.document.write('</body></html>');
+
+	 printWindow.document.close();
+	 printWindow.focus();
+	 printWindow.print();
+ }

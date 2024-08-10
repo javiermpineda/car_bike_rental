@@ -18,7 +18,7 @@ public class UserProfileService {
     }
 
     public UserProfile getUserProfileByUsername(String username) {
-        return userProfileRepository.findByUsername(username);
+        return userProfileRepository.findByFullName(username);
     }
 
     public void saveUserProfile(UserProfile userProfile) {

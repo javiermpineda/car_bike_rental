@@ -2,7 +2,6 @@ package com.project.team5.car_bike_rental.service;
 
 import com.project.team5.car_bike_rental.model.UserProfile;
 import com.project.team5.car_bike_rental.repository.UserProfileRepository;
-import com.project.team5.car_bike_rental.repository.VoucherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

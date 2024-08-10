@@ -1,10 +1,10 @@
 package com.project.team5.car_bike_rental.controller;
 
+import com.project.team5.car_bike_rental.model.Rental;
 import com.project.team5.car_bike_rental.model.UserProfile;
-import com.project.team5.car_bike_rental.model.Voucher;
+import com.project.team5.car_bike_rental.service.RentalService;
 import com.project.team5.car_bike_rental.service.UserProfileService;
 import com.project.team5.car_bike_rental.service.UserService;
-import com.project.team5.car_bike_rental.service.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -25,7 +25,7 @@ public class ProfileController {
     @Autowired
     private UserService userService;
     @Autowired
-    private VoucherService voucherService;
+    private RentalService rentalService;
     private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
     @GetMapping("/profile")
@@ -49,9 +49,9 @@ public class ProfileController {
             return "redirect:/login";
         }
         logger.info("User roles: " + user.getAuthorities());
-        // Fetch vouchers associated with the user
-        List<Voucher> vouchers = voucherService.getVouchersByUserId(userDB.getId());
-        model.addAttribute("vouchers", vouchers);
+        // Fetch rentals associated with the user
+        List<Rental> rentals = rentalService.getRentalsByUserId(userDB.getId());
+        model.addAttribute("rentals", rentals);
 
         model.addAttribute("userProfile", userProfile);
         return "profile/view";

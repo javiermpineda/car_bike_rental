@@ -26,8 +26,8 @@ public class RentalService {
     }
           // Nuevo método para obtener rentas por ID de usuario
     
-          public List<Rental> getRentalsByUserId(Long userId) {
+    public List<Rental> getRentalsByUserId(Long userId) {
             return rentalRepository.findByUserId(userId);
         }
-       
+
 }

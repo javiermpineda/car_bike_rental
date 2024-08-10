@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/image_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Contact Us</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section contact-section">
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+            <div class="col-md-4">
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <div class="border w-100 p-4 rounded mb-2 d-flex">
+                            <div class="icon mr-3">
+                                <span class="icon-map-o"></span>
+                            </div>
+                            <p><span>Address: 121 Brunel Rd, Mississauga, ON L4Z 3E9</span> </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="border w-100 p-4 rounded mb-2 d-flex">
+                            <div class="icon mr-3">
+                                <span class="icon-mobile-phone"></span>
+                            </div>
+                            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="border w-100 p-4 rounded mb-2 d-flex">
+                            <div class="icon mr-3">
+                                <span class="icon-envelope-o"></span>
+                            </div>
+                            <p><span>Email:</span> <a href="mailto:info@yoursite.com">team5@javacourse.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 block-9 mb-md-5">
+                <form th:action="@{/contact}" method="post" class="bg-light p-5 contact-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Your Email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Subject" name="subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Thank you for contacting us!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+    
+<div th:replace="fragments/scripts :: script-content"></div>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script>
+    // Show success modal if success parameter is present
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('success')) {
+        $('#successModal').modal('show');
+    }
+</script>
+</body>
+</html>

@@ -136,15 +136,15 @@
                         <div class="block-27">
                             <ul>
                                 <li th:if="${currentPage > 0}">
-                                    <a th:href="@{/available-vehicles(startDate=${startDate}, endDate=${endDate}, pick_up_location=${pick_up_location}, drop_off_location=${drop_off_location}, page=${currentPage - 1}, size=4)}">&lt;</a>
+                                    <a th:href="@{/available-vehicles(startDate=${startDate}, endDate=${endDate}, pick_up_location=${pick_up_location}, drop_off_location=${drop_off_location}, page=${currentPage - 1}, size=6)}">&lt;</a>
                                 </li>
                                 <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
                                     th:classappend="${i == currentPage} ? 'active' : ''">
-                                    <a th:href="@{/available-vehicles(startDate=${startDate}, endDate=${endDate}, pick_up_location=${pick_up_location}, drop_off_location=${drop_off_location}, page=${i}, size=4)}"
+                                    <a th:href="@{/available-vehicles(startDate=${startDate}, endDate=${endDate}, pick_up_location=${pick_up_location}, drop_off_location=${drop_off_location}, page=${i}, size=6)}"
                                        th:text="${i + 1}"></a>
                                 </li>
                                 <li th:if="${currentPage < totalPages - 1}">
-                                    <a th:href="@{/available-vehicles(startDate=${startDate}, endDate=${endDate}, pick_up_location=${pick_up_location}, drop_off_location=${drop_off_location}, page=${currentPage + 1}, size=4)}">&gt;</a>
+                                    <a th:href="@{/available-vehicles(startDate=${startDate}, endDate=${endDate}, pick_up_location=${pick_up_location}, drop_off_location=${drop_off_location}, page=${currentPage + 1}, size=6)}">&gt;</a>
                                 </li>
                             </ul>
                         </div>

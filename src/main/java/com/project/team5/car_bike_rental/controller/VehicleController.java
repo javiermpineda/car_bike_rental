@@ -51,7 +51,7 @@ public class VehicleController {
             @RequestParam("pick_up_location") String pickUpLocation,
             @RequestParam("drop_off_location") String dropOffLocation,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "4") int size,
+            @RequestParam(defaultValue = "6") int size,
             Model model,
             Authentication authentication) {
 

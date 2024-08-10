@@ -29,5 +29,15 @@ public class RentalService {
           public List<Rental> getRentalsByUserId(Long userId) {
             return rentalRepository.findByUserId(userId);
         }
-       
+
+    public void updateRentalStatus(Long id, String status) {
+        Rental rental = rentalRepository.findById(id).orElseThrow(() -> new RuntimeException("Rental not found"));
+        rental.setState(status);
+        rentalRepository.save(rental);
+    }
+
+    public Rental getRentalById(Long id) {
+        return rentalRepository.findById(id).orElse(null);
+    }
+
 }

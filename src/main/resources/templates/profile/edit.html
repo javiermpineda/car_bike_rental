@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>Edit Profile</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../images/bg_3.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
@@ -26,7 +27,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5>Edit Profile</h5>
-                    <form th:action="@{/profile/edit}" th:object="${userProfile}" method="post">
+                    <form id="editProfileForm" th:action="@{/profile/edit}" th:object="${userProfile}" method="post">
                         <div class="form-group">
                             <label for="fullName">Full Name:</label>
                             <input type="text" id="fullName" th:field="*{fullName}" class="form-control">
@@ -89,7 +90,7 @@
                         </div>
                         <div class="form-group">
                             <label for="cardExpiryDate">Card Expiry Date:</label>
-                            <input type="text" id="cardExpiryDate" th:field="*{cardExpiryDate}" class="form-control">
+                            <input type="date" id="cardExpiryDate" th:field="*{cardExpiryDate}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="cardCvv">Card CVV:</label>
@@ -99,7 +100,7 @@
                             <label for="billingAddress">Billing Address:</label>
                             <input type="text" id="billingAddress" th:field="*{billingAddress}" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" id="saveButton" class="btn btn-primary">Save</button>
                     </form>
                 </div>
             </div>
@@ -108,6 +109,35 @@
 </div>
 
 <div th:replace="fragments/scripts :: script-content"></div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('saveButton').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to save the changes?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('editProfileForm').submit();
+                Swal.fire(
+                    'Saved!',
+                    'Your profile has been saved successfully.',
+                    'success'
+                )
+            }
+        }).catch(() => {
+            Swal.fire(
+                'Error!',
+                'There was an issue saving your profile.',
+                'error'
+            )
+        });
+    });
+</script>
 </body>
 </html>
 

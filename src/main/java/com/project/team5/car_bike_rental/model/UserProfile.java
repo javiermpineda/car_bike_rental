@@ -1,6 +1,8 @@
 package com.project.team5.car_bike_rental.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 @Entity
@@ -12,6 +14,7 @@ public class UserProfile {
 
     private String username;
     private String fullName;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
     private String gender;
     private String email;
@@ -22,10 +25,13 @@ public class UserProfile {
     private String postalCode;
     private String country;
     private String driversLicenseNumber;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate licenseIssueDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate licenseExpiryDate;
     private String licenseCategory;
     private String cardNumber;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate cardExpiryDate;
     private String cardCvv;
     private String billingAddress;

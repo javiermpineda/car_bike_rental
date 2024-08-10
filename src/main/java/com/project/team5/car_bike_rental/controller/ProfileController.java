@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.format.DateTimeFormatter;
+
 @Controller
 public class ProfileController {
 
@@ -30,10 +32,21 @@ public class ProfileController {
     @GetMapping("/profile/edit")
     public String editProfile(@AuthenticationPrincipal User user, Model model) {
         UserProfile userProfile = userProfileRepository.findByUsername(user.getUsername());
+
+        System.out.println("user.getUsername() " + user.getUsername());
+
         if (userProfile == null) {
+            System.out.println("userProfile es nulo");
             userProfile = new UserProfile();
             userProfile.setUsername(user.getUsername());
+        } else {
+            System.out.println("userProfile no es nulo ");
+            System.out.println("userProfile.getUsername() " + userProfile.getUsername());
+            System.out.println("License Issue Date: " + userProfile.getLicenseIssueDate());
+            System.out.println("License Expiry Date: " + userProfile.getLicenseExpiryDate());
         }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         model.addAttribute("userProfile", userProfile);
         return "profile/edit";
     }
@@ -44,6 +57,7 @@ public class ProfileController {
         if (existingProfile != null) {
             userProfile.setId(existingProfile.getId());
         }
+        userProfile.setUsername(user.getUsername());
         userProfileRepository.save(userProfile);
         return "redirect:/profile";
     }

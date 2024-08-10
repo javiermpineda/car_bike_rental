@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -14,6 +16,12 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String username;
+    
+ @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
     @Column(nullable = false)
     private String password;
